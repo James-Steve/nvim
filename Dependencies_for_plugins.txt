@@ -1,2 +1,5 @@
 Treesitter
 c compiler
+npm
+go
+

@@ -20,6 +20,12 @@ lsp.configure('lua_ls', {
     }
 })
 
+lsp.configure('grammarly', {
+   cmd = { "grammarly-languageserver", "--stdio" },
+   filetypes = { "markdown", "txt", "text" }
+
+})
+
 --=========================================================
 --Mason (Lsp installer, Dap installer, linter installer and formatter installer)
 --=========================================================
@@ -33,7 +39,7 @@ require("mason").setup({
     }
 })
 require("mason-lspconfig").setup {
-    ensure_installed = { "rust_analyzer", "lua_ls", "texlab"},
+    ensure_installed = { "rust_analyzer", "lua_ls", "texlab", "bashls", "grammarly"}
 }
 --=========================================================
 --CMP
