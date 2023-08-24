@@ -1,1 +1,3 @@
 shift+. to indent multiple selected lines
+
+crtl+V to enter multiline edditing
