@@ -1,3 +1,10 @@
 shift+. to indent multiple selected lines
 
 crtl+V to enter multiline edditing
+
+
+Spelling
+:spell!  activates spell check
+z= spelling corrections
+]s next mistake
+]s previous mistake

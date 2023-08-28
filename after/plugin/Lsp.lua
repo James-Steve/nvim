@@ -2,13 +2,13 @@ local lsp = require("lsp-zero")
 local lua_snip = require("luasnip")
 lsp.preset("recommended")
 
---[[
 lsp.ensure_installed({
     'tsserver',
     'rust_analyzer',
-    'sumneko_lua',
+    --    'sumneko_lua',
+    'texlab',
+    'ltex',
 })
---]]
 -- Fix Undefined global 'vim'
 lsp.configure('lua_ls', {
     settings = {
@@ -21,8 +21,8 @@ lsp.configure('lua_ls', {
 })
 
 lsp.configure('grammarly', {
-   cmd = { "grammarly-languageserver", "--stdio" },
-   filetypes = { "markdown", "txt", "text" }
+    cmd = { "grammarly-languageserver", "--stdio" },
+    filetypes = { "markdown", "txt", "text", "tex" }
 
 })
 
@@ -39,7 +39,7 @@ require("mason").setup({
     }
 })
 require("mason-lspconfig").setup {
-    ensure_installed = { "rust_analyzer", "lua_ls", "texlab", "bashls", "grammarly"}
+    ensure_installed = { "rust_analyzer", "lua_ls", "texlab", "bashls", "grammarly" }
 }
 --=========================================================
 --CMP
@@ -89,8 +89,9 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
     ["<C-Space>"] = cmp.mapping.complete({
         config = {
             sources = {
-                { name = 'luasnip' } } } }),
-    ['<c-b>'] = cmp.mapping(cmp.mapping.scroll_docs( -4), { 'i', 'c' }),
+                { name = 'luasnip' } }
+        } }),
+    ['<c-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<c-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
     ["<c-y>"] = cmp.mapping(
         cmp.mapping.confirm {
@@ -107,15 +108,17 @@ cmp_mappings['<S-Tab>'] = nil
 local cmp_sources = {
     --    { name = 'cmdline', keyword_length = 5},
     { name = 'luasnip' }, -- For luasnip users.
-    { name = 'nvim_lsp',
-    --============================================================================
-    --NB gets rid of lsp snippets
-    --I.e the snippets that complete/expand but with the snippet trigger still there 
-    --for example sout => soutSystem.Rest.of.snippet
-    --============================================================================
-    entry_filter = function(entry)
-                return require("cmp").lsp.CompletionItemKind.Snippet ~= entry:get_kind()
-            end },
+    {
+        name = 'nvim_lsp',
+        --============================================================================
+        --NB gets rid of lsp snippets
+        --I.e the snippets that complete/expand but with the snippet trigger still there
+        --for example sout => soutSystem.Rest.of.snippet
+        --============================================================================
+        entry_filter = function(entry)
+            return require("cmp").lsp.CompletionItemKind.Snippet ~= entry:get_kind()
+        end
+    },
     { name = 'path' },
     { name = 'nvim_lua' },
     { name = 'buffer',  keyword_length = 3 },
@@ -175,6 +178,6 @@ vim.diagnostic.config({
 })
 
 vim.keymap.set("i", "<C-l>", function() lua_snip.jump(1) end)
-vim.keymap.set("i", "<C-h>", function() lua_snip.jump( -1) end)
+vim.keymap.set("i", "<C-h>", function() lua_snip.jump(-1) end)
 vim.keymap.set("s", "<C-l>", function() lua_snip.jump(1) end)
-vim.keymap.set("s", "<C-h>", function() lua_snip.jump( -1) end)
+vim.keymap.set("s", "<C-h>", function() lua_snip.jump(-1) end)

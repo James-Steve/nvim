@@ -3,3 +3,14 @@ c compiler
 npm
 go
 
+
+
+vimtex
+lsp texlab
+treeseiter latex
+Ubuntu wsl:
+   pdf viewer: zathura 
+   compiler: sudo apt-get install texlive-full
+   compiler 2:latexmk
+
+Fedora

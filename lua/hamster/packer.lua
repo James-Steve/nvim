@@ -102,6 +102,13 @@ return require('packer').startup(function(use)
 
     --todo lists:
     use('vimwiki/vimwiki')
+
+
+    --latex
+    use 'lervag/vimtex'
+    use 'xuhdev/vim-latex-live-preview'
+
+
     --[[
     --snippet manager
     {'hrsh7th/vim-vsnip'},
