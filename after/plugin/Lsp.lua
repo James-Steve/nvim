@@ -1,6 +1,10 @@
 local lsp = require("lsp-zero")
-local lua_snip = require("luasnip")
+--local lua_snip = require("luasnip")
+local lua_snip = require("luasnip.loaders.from_vscode").load {
+    exclude = { "latex" },
+}
 lsp.preset("recommended")
+lsp.set_preferences({manage_luasnip = false})
 
 --[[
 lsp.ensure_installed({
@@ -78,6 +82,7 @@ local cmp_snippet = {
     expand = function(args)
         -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
         require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        lua_snip.lsp_expand(args.body) -- For `luasnip` users.
         -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
         -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
     end,
