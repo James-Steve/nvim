@@ -6,7 +6,7 @@ lsp.ensure_installed({
     'tsserver',
     'rust_analyzer',
     --    'sumneko_lua',
-    'texlab',
+    --'texlab',
     'ltex',
 })
 -- Fix Undefined global 'vim'
