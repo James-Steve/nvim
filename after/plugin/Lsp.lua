@@ -1,6 +1,6 @@
 local lsp = require("lsp-zero")
 local lua_snip = require("luasnip.loaders.from_vscode").load {
-    exclude = { "latex" },
+    exclude = {},
 }
 lsp.preset("recommended")
 lsp.set_preferences({manage_luasnip = false})
