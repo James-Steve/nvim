@@ -1,19 +1,14 @@
 local lsp = require("lsp-zero")
---local lua_snip = require("luasnip")
 local lua_snip = require("luasnip.loaders.from_vscode").load {
     exclude = { "latex" },
 }
 lsp.preset("recommended")
 lsp.set_preferences({manage_luasnip = false})
 
---[[
-lsp.ensure_installed({
-    'tsserver',
-    'rust_analyzer',
-    'sumneko_lua',
-})
---]]
 -- Fix Undefined global 'vim'
+--======================================================
+--Configuring Custom Servers
+--======================================================
 lsp.configure('lua_ls', {
     settings = {
         Lua = {
@@ -29,7 +24,6 @@ lsp.configure('grammarly', {
    filetypes = { "markdown", "txt", "text" }
 
 })
-
 --=========================================================
 --Mason (Lsp installer, Dap installer, linter installer and formatter installer)
 --=========================================================
@@ -49,32 +43,6 @@ require("mason-lspconfig").setup {
 --CMP
 --=========================================================
 local cmp = require('cmp')
---[[
-cmp.setup({
-    snippet = {
-        -- REQUIRED - you must specify a snippet engine
-        expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-            -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-            -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-            -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-        end,
-    },
-    sources = cmp.config.sources({
-        --    { name = 'cmdline', keyword_length = 5},
-        { name = 'nvim_lua'},
-        { name = 'nvim_lsp'},
-        { name = 'vsnip'}, -- For vsnip users.
-        -- { name = 'luasnip' }, -- For luasnip users.
-        -- { name = 'ultisnips' }, -- For ultisnips users.
-        -- { name = 'snippy' }, -- For snippy users.
-
-        --   { name = 'path', keyword_length = 1},
-        { name = 'buffer', keyword_length = 5 },
-    })
-
-})
---]]
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
 local cmp_snippet = {
@@ -110,7 +78,7 @@ cmp_mappings['<Tab>'] = nil
 cmp_mappings['<S-Tab>'] = nil
 
 local cmp_sources = {
-    --    { name = 'cmdline', keyword_length = 5},
+    --{ name = 'cmdline', keyword_length = 5},
     { name = 'luasnip' }, -- For luasnip users.
     { name = 'nvim_lsp',
     --============================================================================
@@ -124,8 +92,6 @@ local cmp_sources = {
     { name = 'path' },
     { name = 'nvim_lua' },
     { name = 'buffer',  keyword_length = 3 },
-    --{ name = 'l
-
 }
 
 lsp.setup_nvim_cmp({
