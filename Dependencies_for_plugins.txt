@@ -16,3 +16,5 @@ https://tex.stackexchange.com/questions/540429/tlmgr-in-ubuntu-20-04-local-tex-l
    compiler 2:latexmk
 
 Fedora
+perl sudo dnf install perl
+text live from source
