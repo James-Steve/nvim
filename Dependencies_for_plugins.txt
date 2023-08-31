@@ -8,7 +8,9 @@ go
 vimtex
 lsp texlab
 treeseiter latex
+biber package manger 
 Ubuntu wsl:
+https://tex.stackexchange.com/questions/540429/tlmgr-in-ubuntu-20-04-local-tex-live-2019-is-older-than-remote-repository-2
    pdf viewer: zathura 
    compiler: sudo apt-get install texlive-full
    compiler 2:latexmk

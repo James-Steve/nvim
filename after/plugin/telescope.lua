@@ -28,6 +28,15 @@ vim.keymap.set('n', '<Leader>rc', function()
     })
 end
     , {})
+--Telescoping in ~/.config/LatexStuff/
+vim.keymap.set('n', '<Leader>rl', function()
+    builtin.find_files({
+        prompt_title = "<Latex>",
+        cwd = "~/.config/LatexStuff",
+        hidden = true,
+    })
+end
+    , {})
 --File Browser
 vim.keymap.set('n', '<Leader>bb', tel.extensions.file_browser.file_browser, {})
 --Buffers
