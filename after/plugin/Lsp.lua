@@ -1,6 +1,8 @@
 local lsp = require("lsp-zero")
 local lua_snip = require("luasnip.loaders.from_vscode").load {
     exclude = {},
+    --exclude = {"javascript"},
+
 }
 lsp.preset("recommended")
 lsp.set_preferences({manage_luasnip = false})
@@ -64,6 +66,8 @@ local cmp_snippet = {
 }
 
 local cmp_mappings = lsp.defaults.cmp_mappings({
+    --disables enter from triggering cmp
+    ['<CR>'] = cmp.config.disable,
     ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
     ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
     ["<C-Space>"] = cmp.mapping.complete({
@@ -71,7 +75,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
             sources = {
                 { name = 'luasnip' } }
         } }),
-    ['<c-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+    ['<c-B>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<c-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
     ["<c-y>"] = cmp.mapping(
         cmp.mapping.confirm {
