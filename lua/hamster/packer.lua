@@ -117,6 +117,10 @@ return require('packer').startup(function(use)
     {'rafamadriz/friendly-snippets'},
     {'J0rgeSerran0/vscode-csharp-snippets'},
     --]]
+
+
+
+    use 'ThePrimeagen/vim-be-good'
 end)
 
 
