@@ -74,7 +74,7 @@ return require('packer').startup(function(use)
 
     --indentation marker
     use {
-        'lukas-reineke/indent-blankline.nvim',
+        'lukas-reineke/indent-blankline.nvim',tag = "v2.20.8",
         config = function()
             require("indent_blankline").setup {
                 -- for example, context is off by default, use this to turn it on
