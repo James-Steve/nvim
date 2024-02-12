@@ -12,7 +12,7 @@ z= spelling corrections
 
 Redoing Find (f "x")
 ; to walkforward
-: to walkbackward
+, to walkbackward
 
 
 Searching and replacing (substitute)
@@ -21,8 +21,13 @@ Searching and replacing (substitute)
 :%s/<Search_Phrase>/<Replace_Phrase>/g   This would replace all occurences in file
 escape character is \
 
-for example :s/\./.\r/g
+for example 
+    :s/\./.\r/g
     replace all occurances of "." with "." and new line
+    :%s/\[\(\k\|\k\k\)\]//g
+    replaces all the sqaure brackets that contain one or two digits with nothing
+    :19,24s/^/* /g
+    replace the start of the line from line 19 to 24 (inclusive) with "* " 
 
 *       search for the next occurence of thing under cursor
 %       Find the next item in the line after or under the cursor ([{}])

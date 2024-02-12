@@ -54,7 +54,7 @@ end)
 
 
 --undo Break points
-vim.keymap.set("n","," ,"<c-g>u")
+vim.keymap.set("n","<space>," ,"<c-g>u")
 vim.keymap.set("n", ".", ".<c-g>u")
 vim.keymap.set("n","!", "!<c-g>u")
 vim.keymap.set("n","?", "?<c-g>u")
