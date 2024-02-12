@@ -6,7 +6,7 @@ return require('packer').startup(function(use)
 
     --telescope
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.1',
+        'nvim-telescope/telescope.nvim', --tag = '0.1.1',
         -- or                            , branch = '0.1.x',
         requires = { {'nvim-lua/plenary.nvim'}, {'nvim-telescope/telescope-file-browser.nvim' }, {'kiyoon/telescope-insert-path.nvim'}}
     }
@@ -74,7 +74,7 @@ return require('packer').startup(function(use)
 
     --indentation marker
     use {
-        'lukas-reineke/indent-blankline.nvim',tag = "v2.20.8",
+        'lukas-reineke/indent-blankline.nvim', tag = 'v2.20.8',
         config = function()
             require("indent_blankline").setup {
                 -- for example, context is off by default, use this to turn it on
