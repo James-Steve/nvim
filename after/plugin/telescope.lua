@@ -12,6 +12,7 @@ tel.setup {
         --["{"] = path_actions.insert_reltobufpath_insert,
         --["}"] = path_actions.insert_abspath_insert,
         ["pr"] = path_actions.insert_reltobufpath_normal,
+        ["["] = path_actions.insert_reltobufpath_a_normal,
         ["pa"] = path_actions.insert_abspath_normal,
 	-- If you want to get relative path that is relative to the cwd, use
 	-- `relpath` instead of `reltobufpath`
@@ -32,6 +33,10 @@ tel.load_extension("file_browser")
 
 
 vim.keymap.set('n', '<Leader>ff', function()
+    builtin.find_files({ hidden = true, file_ignore_pattern = { ".git/*", ".git/" } })
+end
+    , {})
+vim.keymap.set('v', '<Leader>ff', function()
     builtin.find_files({ hidden = true, file_ignore_pattern = { ".git/*", ".git/" } })
 end
     , {})
