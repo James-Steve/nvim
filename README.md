@@ -22,9 +22,30 @@ Welcome to my Custom Neovim Configuration
 | indent-blanklink    | Indentation marker           |
 | lualine             | Status line                  |
 | gitsigns            | Git Integration              |
-| vimwiki             | Dairy/To-do Lists             |
+| vimwiki             | Dairy/To-do Lists            |
 | vimtex              | Latex Previewer              |
 | markdown-preview    | Markdown Previewer           |
+
+## Dependencies
+- C Compiler
+- npm
+- nvm
+- go
+- node
+- python3
+- jdk
+- .dotnet cli
+- ripgrep
+- 7zip
+- git
+- curl
+- wget
+- unzip
+- tar
+- gzip
+- cargo
+
+
 
 ## Directory Structure and Function
 ├── after &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;&emsp; All files in this directory are excuted after plugins are loaded \
