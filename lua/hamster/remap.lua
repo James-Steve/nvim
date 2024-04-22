@@ -21,6 +21,8 @@ vim.keymap.set("n","<C-Up>",":m .-2<CR>")
 vim.keymap.set("n","Y", "y$")
 --Pastes from yank register
 vim.keymap.set("n", "P", "\"0p")
+--Pastes from yank register - Visual Mode
+vim.keymap.set("v", "P", "\"0p")
 --alows you to replace highlighted words in visual mode without losing word in yank
 vim.keymap.set("x", "<leader>p", "\"_P")
 --adds yank to system clipboard

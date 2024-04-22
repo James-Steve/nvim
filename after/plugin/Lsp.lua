@@ -33,6 +33,10 @@ lsp.configure('grammarly', {
     filetypes = { "markdown", "txt", "text", "tex" }
 
 })
+lsp.configure('ast_grep', {
+    filetypes = {"c","h", "cs", "js", "py", "ts" ,"html", "css", "lua"}
+
+})
 --=========================================================
 --Mason (Lsp installer, Dap installer, linter installer and formatter installer)
 --=========================================================
@@ -46,7 +50,8 @@ require("mason").setup({
     }
 })
 require("mason-lspconfig").setup {
-    ensure_installed = { "rust_analyzer", "lua_ls", "texlab", "bashls", "grammarly" }
+    ensure_installed = { "rust_analyzer", "lua_ls", "texlab", "bashls", "grammarly" ,
+                        "omnisharp", "omnisharp_mono", "csharp_ls", "netcoredbg"} --"csharpier", "clang-format"}
 }
 --=========================================================
 --CMP
