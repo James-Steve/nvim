@@ -105,8 +105,8 @@ return require('packer').startup(function(use)
 
 
     --latex
-    --use 'lervag/vimtex'
-    --use 'xuhdev/vim-latex-live-preview'
+    use 'lervag/vimtex'
+    use 'xuhdev/vim-latex-live-preview'
 
 
     --[[
