@@ -4,6 +4,7 @@ local ls = require("luasnip")
 local lua_snip = require("luasnip.loaders.from_vscode").lazy_load({
     exclude= {},
 })
+
 lsp.preset("recommended")
 lsp.set_preferences({manage_luasnip = false})
 
@@ -164,8 +165,10 @@ vim.diagnostic.config({
     virtual_text = true
 })
 
+ls.filetype_extend("csharp", {"csharpdoc"})
+ls.filetype_extend("cs", {"csharpdoc"})
 vim.keymap.set("i", "<C-h>", function() ls.jump(-1) end)
 vim.keymap.set("i", "<C-l>", function() ls.jump(1) end)
 vim.keymap.set("s", "<C-l>", function() ls.jump(1) end)
 vim.keymap.set("s", "<C-h>", function() ls.jump(-1) end)
-
+vim.keymap.set("i", "<C-g>", function() ls.expand() end)
