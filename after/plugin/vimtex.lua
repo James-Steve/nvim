@@ -36,8 +36,8 @@ vim.g.livepreview_previewer = "okular"
 --vim.g.vimtex_compiler_latexmk.out_dir="out/"
 --vim.g.vimtex_compiler_latexmk = {aux_dir="aux/", out_dir="out/"}
 vim.g.vimtex_compiler_latexmk = {
-    aux_dir = 'aux',
-    out_dir = 'out',
+    aux_dir = 'Aux',
+    out_dir = 'Out',
     callback = 1,
     continuous = 1,
     executable = 'latexmk',
