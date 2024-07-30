@@ -2,10 +2,10 @@ local lsp = require("lsp-zero")
 
 local ls = require("luasnip")
 local lua_snip = require("luasnip.loaders.from_vscode").lazy_load({
-    exclude= {},
+    exclude = {},
 })
 lsp.preset("recommended")
-lsp.set_preferences({manage_luasnip = false})
+lsp.set_preferences({ manage_luasnip = false })
 
 lsp.ensure_installed({
     'tsserver',
@@ -34,7 +34,7 @@ lsp.configure('grammarly', {
 
 })
 lsp.configure('ast_grep', {
-    filetypes = {"c","h", "cs", "js", "py", "ts" ,"html", "css", "lua"}
+    filetypes = { "c", "h", "cs", "js", "py", "ts", "html", "css", "lua" }
 
 })
 --=========================================================
@@ -50,8 +50,8 @@ require("mason").setup({
     }
 })
 require("mason-lspconfig").setup {
-    ensure_installed = { "rust_analyzer", "lua_ls", "texlab", "bashls", "grammarly" ,
-                        "omnisharp", "omnisharp_mono", "csharp_ls", "netcoredbg"} --"csharpier", "clang-format"}
+    ensure_installed = { "rust_analyzer", "lua_ls", "texlab", "bashls", "grammarly",
+        "omnisharp", "omnisharp_mono", "csharp_ls", "netcoredbg" } --"csharpier", "clang-format"}
 }
 --=========================================================
 --CMP
@@ -64,7 +64,7 @@ local cmp_snippet = {
     expand = function(args)
         -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
         require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        lua_snip.lsp_expand(args.body) -- For `luasnip` users.
+        lua_snip.lsp_expand(args.body)           -- For `luasnip` users.
         -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
         -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
     end,
@@ -169,3 +169,36 @@ vim.keymap.set("i", "<C-l>", function() ls.jump(1) end)
 vim.keymap.set("s", "<C-l>", function() ls.jump(1) end)
 vim.keymap.set("s", "<C-h>", function() ls.jump(-1) end)
 
+vim.api.nvim_create_autocmd('BufEnter', {
+    pattern = { '*.md', '*.tex' },
+    group = group,
+    command = 'setlocal wrap'
+})
+
+
+require('mason-nvim-dap').setup({
+    ensure_installed = { 'stylua', 'jq' },
+    handlers = {
+        --[[
+        coreclr = function(source_name)
+            local dap = require("dap")
+            dap.adapters.coreclr = {
+                type = 'executable',
+                command = 'netcoredbg',
+                args = { '--interpreter=cli' }
+            }
+
+            dap.configurations.cs = {
+                {
+                    type = "coreclr",
+                    name = "launch - netcoredbg",
+                    request = "launch",
+                    program = function()
+                        return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+                    end,
+                },
+            }
+        end,
+        --]]
+    }, -- sets up dap in the predefined manner
+})

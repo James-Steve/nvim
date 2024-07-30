@@ -30,6 +30,8 @@ return require('packer').startup(function(use)
             { 'neovim/nvim-lspconfig' },             -- Required
             { 'williamboman/mason.nvim' },           -- Optional
             { 'williamboman/mason-lspconfig.nvim' }, -- Optional
+            {'mfussenegger/nvim-dap'},
+            {'jay-babu/mason-nvim-dap.nvim'},
 
             -- Autocompletion
             { 'hrsh7th/nvim-cmp' },         -- Required
@@ -105,8 +107,8 @@ return require('packer').startup(function(use)
 
 
     --latex
-    --use 'lervag/vimtex'
-    --use 'xuhdev/vim-latex-live-preview'
+    use 'lervag/vimtex'
+    use 'xuhdev/vim-latex-live-preview'
 
 
     --[[

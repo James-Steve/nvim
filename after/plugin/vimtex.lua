@@ -30,8 +30,8 @@ let maplocalleader = ","
 --]]
 --vim.g.vimtex_view_method="zathura"
 --let g:livepreview_previewer = 'evince'
-vim.g.vimtex_view_method = "okular.exe"
-vim.g.livepreview_previewer = "okular.exe"
+vim.g.vimtex_view_method = "okular"
+vim.g.livepreview_previewer = "okular"
 --vim.g.vimtex_compiler_latexmk.aux_dir="aux/"
 --vim.g.vimtex_compiler_latexmk.out_dir="out/"
 --vim.g.vimtex_compiler_latexmk = {aux_dir="aux/", out_dir="out/"}
