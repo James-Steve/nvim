@@ -21,7 +21,7 @@ return require('packer').startup(function(use)
     use("mbbill/undotree")
     --HARPOON!!
     use("theprimeagen/harpoon")
-
+    --Snippets
     use {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v1.x',
@@ -40,10 +40,7 @@ return require('packer').startup(function(use)
             { 'hrsh7th/cmp-path' },         -- Optional
             { 'saadparwaiz1/cmp_luasnip' }, -- Optional
             { 'hrsh7th/cmp-nvim-lua' },     -- Optional
-
             -- Snippets
-            { 'L3MON4D3/LuaSnip' },             -- Required
-            { 'rafamadriz/friendly-snippets' }, -- Optional
             { 'J0rgeSerran0/vscode-csharp-snippets' },
             --{'luasnip-expand-or-jump'},
 
@@ -55,6 +52,11 @@ return require('packer').startup(function(use)
             {'J0rgeSerran0/vscode-csharp-snippets'},
 --]]
         }
+    }
+    use "rafamadriz/friendly-snippets"
+    use {
+        "L3MON4D3/LuaSnip",
+        dependencies = { "rafamadriz/friendly-snippets" },
     }
     use('mfussenegger/nvim-jdtls')
     --====================================================================

@@ -4,16 +4,32 @@ local ls = require("luasnip")
 local lua_snip = require("luasnip.loaders.from_vscode").lazy_load({
     exclude = {},
 })
+--From Desktop
+lsp.preset("recommended")
+lsp.set_preferences({ manage_luasnip = false })
+--end from Desktop
+
 lsp.preset("recommended")
 lsp.set_preferences({ manage_luasnip = false })
 
+--[[
 lsp.ensure_installed({
-    'tsserver',
-    'rust_analyzer',
+
+    --'tsserver',
+    --'rust_analyzer',
     --    'sumneko_lua',
     --'texlab',
-    'ltex',
+    --'ltex',
+    "rust_analyzer",
+    "lua_ls",
+    "texlab",
+    "bashls",
+    "grammarly",
+    "omnisharp",
+    "omnisharp_mono",
+    "csharp_ls",
 })
+--]]
 -- Fix Undefined global 'vim'
 --======================================================
 --Configuring Custom Servers
@@ -50,9 +66,9 @@ require("mason").setup({
     }
 })
 require("mason-lspconfig").setup {
-    ensure_installed = { "rust_analyzer", "lua_ls", "texlab", "bashls", "grammarly",
-        "omnisharp", "omnisharp_mono", "csharp_ls", "netcoredbg" } --"csharpier", "clang-format"}
+    --ensure_installed = { "rust_analyzer", "lua_ls", "texlab", "bashls", "grammarly", "omnisharp", "omnisharp_mono", "csharp_ls", "netcoredbg" }                --"csharpier", "clang-format"}
 }
+--vim.cmd "MasonInstall  rust_analyzer lua_ls texlab bashls grammarly omnisharp omnisharp_mono csharp_ls netcoredbg"
 --=========================================================
 --CMP
 --=========================================================
@@ -79,7 +95,8 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
         config = {
             sources = {
                 { name = 'luasnip' } }
-        } }),
+        }
+    }),
     ['<c-B>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<c-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
     ["<c-y>"] = cmp.mapping(
@@ -164,6 +181,8 @@ vim.diagnostic.config({
     virtual_text = true
 })
 
+ls.filetype_extend("csharp", {"csharpdoc"})
+ls.filetype_extend("cs", {"csharpdoc"})
 vim.keymap.set("i", "<C-h>", function() ls.jump(-1) end)
 vim.keymap.set("i", "<C-l>", function() ls.jump(1) end)
 vim.keymap.set("s", "<C-l>", function() ls.jump(1) end)
@@ -202,3 +221,4 @@ require('mason-nvim-dap').setup({
         --]]
     }, -- sets up dap in the predefined manner
 })
+vim.keymap.set("i", "<C-g>", function() ls.expand() end)
