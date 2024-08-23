@@ -13,7 +13,7 @@ conform.setup({
 		yaml = { "prettier" },
 		markdown = { "prettier" },
 		graphql = { "prettier" },
-		lua = { "stylua" },
+		lua = { "lua-format" },
 		--python = { "isort", "black" },
 	},
 	format_on_save = {
