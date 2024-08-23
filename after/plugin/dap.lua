@@ -8,6 +8,7 @@ dap.listeners.before.event_terminated.dapui_config =
 dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
 
 vim.keymap.set("n", "<F5>", function() require("dap").continue() end)
+vim.keymap.set("n", "<F6>", function() require("dap").step_back() end)
 vim.keymap.set("n", "<F10>", function() require("dap").step_over() end)
 vim.keymap.set("n", "<F11>", function() require("dap").step_into() end)
 vim.keymap.set("n", "<F12>", function() require("dap").step_out() end)
@@ -30,4 +31,10 @@ end)
 vim.keymap.set("n", "<Leader>ds", function()
     local widgets = require("dap.ui.widgets")
     widgets.centered_float(widgets.scopes)
+end)
+
+
+vim.keymap.set({"n", "v"}, "<Leader>de", function() 
+    require("dapui").eval()
+
 end)
