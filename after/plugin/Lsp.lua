@@ -46,7 +46,7 @@ lsp.configure('grammarly', {
 
 })
 lsp.configure('ast_grep', {
-    filetypes = { "c", "h", "cs", "js", "py", "ts", "html", "css", "lua" }
+    filetypes = { "c", "h", "cs", "js", "py", "ts", "html", "css", "lua", "Java" }
 
 })
 --=========================================================
