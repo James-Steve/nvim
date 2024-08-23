@@ -4,6 +4,10 @@ local ls = require("luasnip")
 local lua_snip = require("luasnip.loaders.from_vscode").lazy_load({
     exclude = {},
 })
+--From Desktop
+lsp.preset("recommended")
+lsp.set_preferences({ manage_luasnip = false })
+--end from Desktop
 
 lsp.preset("recommended")
 lsp.set_preferences({ manage_luasnip = false })
@@ -183,4 +187,38 @@ vim.keymap.set("i", "<C-h>", function() ls.jump(-1) end)
 vim.keymap.set("i", "<C-l>", function() ls.jump(1) end)
 vim.keymap.set("s", "<C-l>", function() ls.jump(1) end)
 vim.keymap.set("s", "<C-h>", function() ls.jump(-1) end)
+
+vim.api.nvim_create_autocmd('BufEnter', {
+    pattern = { '*.md', '*.tex' },
+    group = group,
+    command = 'setlocal wrap'
+})
+
+
+require('mason-nvim-dap').setup({
+    ensure_installed = { 'stylua', 'jq' },
+    handlers = {
+        --[[
+        coreclr = function(source_name)
+            local dap = require("dap")
+            dap.adapters.coreclr = {
+                type = 'executable',
+                command = 'netcoredbg',
+                args = { '--interpreter=cli' }
+            }
+
+            dap.configurations.cs = {
+                {
+                    type = "coreclr",
+                    name = "launch - netcoredbg",
+                    request = "launch",
+                    program = function()
+                        return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+                    end,
+                },
+            }
+        end,
+        --]]
+    }, -- sets up dap in the predefined manner
+})
 vim.keymap.set("i", "<C-g>", function() ls.expand() end)
