@@ -1,5 +1,7 @@
+vim.opt.splitright = true
+
 vim.opt.number = true
-vim.opt.relativenumber=true
+vim.opt.relativenumber = true
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -28,11 +30,11 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
-
 vim.api.nvim_create_user_command('Redir', function(ctx)
-  local lines = vim.split(vim.api.nvim_exec(ctx.args, true), '\n', { plain = true })
-  vim.cmd('new')
-  vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
-  vim.opt_local.modified = false
-end, { nargs = '+', complete = 'command' })
- -- :Redir lua=vim.tbl_keys(package.loaded)
+    local lines = vim.split(vim.api.nvim_exec(ctx.args, true), '\n',
+                            {plain = true})
+    vim.cmd('new')
+    vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+    vim.opt_local.modified = false
+end, {nargs = '+', complete = 'command'})
+-- :Redir lua=vim.tbl_keys(package.loaded)
