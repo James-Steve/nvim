@@ -41,16 +41,20 @@ M       move cursor to the middle of the screen
 <<      un-indent the current line
 ''      go to the position before the latest jump
 m q-p   maps a book mark to any letter from q to p, got to book mark by calling 'q-p 
+
+
 ctrl+u  moves by a half a screenful up
 ctrl+d  moves by a half a screenful down
 ctrl+o  move backward through jump history (starts at last jump, then second last, etc)
 ctrl+i  move forward through jump history (once you back by using ctrl+o you can then go forward)
 
 ctrl+w move to different splits
-crtr+w J move current split down
-crtr+w K move current split up
-crtr+w H move current split right
-crtr+w L move current split left
+ctrl+w J move to current split down
+ctrl+w K move to current split up
+ctrl+w H move to current split right
+ctrl+w L move to current split left
+
+ctrl+v visual block, multi line select (Use I, C, etc to edit the multi line)
 
 :%s@search@replace@gc replace "search" with string you want to search for and "replace" with the replacement string
 
