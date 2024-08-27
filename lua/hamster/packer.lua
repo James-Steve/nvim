@@ -141,4 +141,10 @@ return require("packer").startup(function(use)
         "rcarriga/nvim-dap-ui",
         requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"}
     })
+
+    use({
+        "stevearc/oil.nvim",
+        requires = {"echasnovski/mini.nvim", "nvim-tree/nvim-web-devicons"}
+    })
+
 end)
