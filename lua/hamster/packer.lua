@@ -147,6 +147,16 @@ return require("packer").startup(function(use)
         requires = {"echasnovski/mini.nvim", "nvim-tree/nvim-web-devicons"}
     })
 
+    use({
+        "tpope/vim-dadbod",
+        requires = {
+            "kristijanhusak/vim-dadbod-completion",
+            "kristijanhusak/vim-dadbod-ui"
+        }
+    })
+
+    -- dmbl database design file, syntax highlighting
+    use({"jidn/vim-dbml"})
     -- keymapping
     use({
         "tris203/hawtkeys.nvim",
