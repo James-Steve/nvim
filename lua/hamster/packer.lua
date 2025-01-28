@@ -147,11 +147,13 @@ return require("packer").startup(function(use)
         requires = {"echasnovski/mini.nvim", "nvim-tree/nvim-web-devicons"}
     })
 
+    -- datbase
     use({
         "tpope/vim-dadbod",
         requires = {
             "kristijanhusak/vim-dadbod-completion",
-            "kristijanhusak/vim-dadbod-ui"
+            "kristijanhusak/vim-dadbod-ui",
+            "tpope/vim-dotenv"
         }
     })
 
