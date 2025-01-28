@@ -14,8 +14,10 @@ conform.setup({
         markdown = {"prettier"},
         graphql = {"prettier"},
         lua = {"lua-format"},
-        python = {"isort", "black"}
+        python = {"isort", "black"},
         --python = {"pyink"}
+        --sql = {"sql-formatter", "sqlfmt"}
+        sql = {"sqlfmt"}
     }
     -- format_on_save = {lsp_fallback = false, async = false, timeout_ms = 1000}
 })
