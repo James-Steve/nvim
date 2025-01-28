@@ -95,6 +95,7 @@ return require("packer").startup(function(use)
     -- git integration:
     -- Git show information in files (author, insertions,)
     use("lewis6991/gitsigns.nvim")
+    use("sindrets/diffview.nvim")
 
     -- todo lists:
     use("vimwiki/vimwiki")
