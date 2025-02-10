@@ -3,6 +3,9 @@ vim.cmd.packadd("packer.nvim")
 return require("packer").startup(function(use)
     use("wbthomason/packer.nvim")
 
+    --dotenv
+    use("SergioRibera/cmp-dotenv")
+
     -- telescope
     use({
         "nvim-telescope/telescope.nvim", -- tag = '0.1.1',
@@ -144,6 +147,7 @@ return require("packer").startup(function(use)
         requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"}
     })
 
+    --File Browsing, Creation, Editting
     use({
         "stevearc/oil.nvim",
         requires = {"echasnovski/mini.nvim", "nvim-tree/nvim-web-devicons"}
@@ -160,6 +164,7 @@ return require("packer").startup(function(use)
     })
 
     -- dmbl database design file, syntax highlighting
+    use({"nanotee/sqls.nvim"})
     use({"jidn/vim-dbml"})
     -- keymapping
     use({
