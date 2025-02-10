@@ -1,6 +1,21 @@
 local conform = require("conform")
 
 conform.setup({
+    -- formatters = {["sqlfmt"] = {env = { SQLFMT_DIALECT = "clickhouse",}}},
+    formatters = {
+        ["sql_formatter"] = {args = {"-l", "postgresql", "$FILENAME"}},
+        ["pg_format"] = {
+            command = "pg_format",
+            -- args = { "--format-type", "--sapces", "2", "--keyword-case", "2", "--type-case", "3", "--Wrap-after", "50", "--no-space-function", "$FILENAME" }
+            -- args = { "--format-type", "--spaces", 2, "--keyword-case", 2, "--type-case", 3, "--wrap-after", 200, "--no-space-function", "--no-extra-line", "$FILENAME" }
+            args = {
+                "--format-type", "--spaces", 4, "--keyword-case", 2,
+                "--type-case", 3, "--no-space-function", "--no-extra-line",
+                "--tabs", "--keep-newline", "$FILENAME"
+            }
+            -- args = {"-t -s 4 -u 2 -U 3 -W 50 --no-space-function UpdatePlant.sql"},
+        }
+    },
     formatters_by_ft = {
         javascript = {"prettier"},
         typescript = {"prettier"},
@@ -15,9 +30,10 @@ conform.setup({
         graphql = {"prettier"},
         lua = {"lua-format"},
         python = {"isort", "black"},
-        --python = {"pyink"}
-        --sql = {"sql-formatter", "sqlfmt"}
-        sql = {"sqlfmt"}
+        -- python = {"pyink"}
+        -- sql = {"sql_formatter"}
+        sql = {"pg_format"}
+        -- sql = {"sqlfmt"}
     }
     -- format_on_save = {lsp_fallback = false, async = false, timeout_ms = 1000}
 })
