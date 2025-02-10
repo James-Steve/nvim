@@ -77,6 +77,8 @@ require('gitsigns').setup {
         -- map('n', '<leader>hR', gs.reset_buffer)
         map('n', '<C-g><C-n>', gs.next_hunk)
         map('n', '<C-g><C-p>', gs.prev_hunk)
+        map({'n', 'v'}, '<leader>gsh', gs.stage_hunk)
+        map({'n', 'v'}, '<leader>gsuh', gs.undo_stage_hunk)
 
         map('n', '<leader>gip', gs.preview_hunk)
         map('n', '<leader>gisb', function() gs.blame_line {full = true} end)
