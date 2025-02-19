@@ -3,43 +3,24 @@ local lsp = require("lsp-zero")
 local ls = require("luasnip")
 local lua_snip =
     require("luasnip.loaders.from_vscode").lazy_load({exclude = {}})
--- From Desktop
-lsp.preset("recommended")
-lsp.set_preferences({manage_luasnip = false})
--- end from Desktop
-
 lsp.preset("recommended")
 lsp.set_preferences({manage_luasnip = false})
 
---[[
-lsp.ensure_installed({
-
-    --'tsserver',
-    --'rust_analyzer',
-    --    'sumneko_lua',
-    --'texlab',
-    --'ltex',
-    "rust_analyzer",
-    "lua_ls",
-    "texlab",
-    "bashls",
-    "grammarly",
-    "omnisharp",
-    "omnisharp_mono",
-    "csharp_ls",
-})
---]]
--- Fix Undefined global 'vim'
--- ======================================================
--- Configuring Custom Servers
--- ======================================================
+require("ionide").setup {
+    -- on_init = on_init,
+    on_attach = function(client, bufnr)
+        lsp.on_attach(client, bufnr)
+        vim.lsp.codelens.refresh()
+    end,
+    capabilities = require("cmp_nvim_lsp").default_capabilities()
+}
 lsp.configure('lua_ls', {settings = {Lua = {diagnostics = {globals = {'vim'}}}}})
-
 lsp.configure('grammarly', {
     cmd = {"grammarly-languageserver", "--stdio"},
     filetypes = {"markdown", "txt", "text", "tex"}
 
 })
+lsp.configure('ltex', {settings = {language = "en-GB"}})
 lsp.configure('ast_grep', {
     filetypes = {"c", "h", "cs", "js", "py", "ts", "html", "css", "lua", "Java"}
 
@@ -56,10 +37,9 @@ require("mason").setup({
         }
     }
 })
+lsp.skip_server_setup({'fsautocomplete'})
 require("mason-lspconfig").setup {
-    -- ensure_installed = { "rust_analyzer", "lua_ls", "texlab", "bashls", "grammarly", "omnisharp", "omnisharp_mono", "csharp_ls", "netcoredbg" }                --"csharpier", "clang-format"}
 }
--- vim.cmd "MasonInstall  rust_analyzer lua_ls texlab bashls grammarly omnisharp omnisharp_mono csharp_ls netcoredbg"
 -- =========================================================
 -- CMP
 -- =========================================================
@@ -178,27 +158,6 @@ vim.api.nvim_create_autocmd('BufEnter', {
 require('mason-nvim-dap').setup({
     ensure_installed = {'stylua', 'jq'},
     handlers = {
-        --[[
-        coreclr = function(source_name)
-            local dap = require("dap")
-            dap.adapters.coreclr = {
-                type = 'executable',
-                command = 'netcoredbg',
-                args = { '--interpreter=cli' }
-            }
-
-            dap.configurations.cs = {
-                {
-                    type = "coreclr",
-                    name = "launch - netcoredbg",
-                    request = "launch",
-                    program = function()
-                        return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
-                    end,
-                },
-            }
-        end,
-        --]]
     } -- sets up dap in the predefined manner
 })
 vim.keymap.set("i", "<C-g>", function() ls.expand() end)

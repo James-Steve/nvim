@@ -56,6 +56,8 @@ return require("packer").startup(function(use)
 --]]
         }
     })
+    use('ionide/Ionide-vim')
+    --use("WillEhrendreich/Ionide-Nvim")
     use("rafamadriz/friendly-snippets")
     use({"L3MON4D3/LuaSnip", dependencies = {"rafamadriz/friendly-snippets"}})
     use("mfussenegger/nvim-jdtls")
@@ -107,6 +109,7 @@ return require("packer").startup(function(use)
     -- latex
     use("lervag/vimtex")
     use("xuhdev/vim-latex-live-preview")
+    use("Ron89/thesaurus_query.vim")
 
     --[[
     --snippet manager

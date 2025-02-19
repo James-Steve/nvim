@@ -49,8 +49,7 @@ vim.g.vimtex_compiler_latexmk = {
         '-interaction=nonstopmode',
     },
 }
-
-
+vim.g.tq_mthesaur_file="~/Documents/mthesaur.txt"
 --[[
     let g:vimtex_compiler_latexmk = {
         \ 'aux_dir' : '',
@@ -67,3 +66,4 @@ vim.g.vimtex_compiler_latexmk = {
         \ ],
         \}
         --]]
+        --
