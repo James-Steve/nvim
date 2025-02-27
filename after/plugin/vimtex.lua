@@ -1,4 +1,4 @@
---vimtext settings
+-- vimtext settings
 --[[
 " This is necessary for VimTeX to load properly. The "indent" is optional.
 " Note that most plugin managers will do this automatically.
@@ -27,17 +27,17 @@ let g:vimtex_compiler_method = 'latexrun'
 " Most VimTeX mappings rely on localleader and this can be changed with the
 " following line. The default is usually fine and is the symbol "\".
 let maplocalleader = ","
---]]
---vim.g.vimtex_view_method="zathura"
---let g:livepreview_previewer = 'evince'
+--]] -- vim.g.vimtex_view_method="zathura"
+-- let g:livepreview_previewer = 'evince'
 vim.g.vimtex_view_method = "okular"
 vim.g.livepreview_previewer = "okular"
---vim.g.vimtex_compiler_latexmk.aux_dir="aux/"
---vim.g.vimtex_compiler_latexmk.out_dir="out/"
---vim.g.vimtex_compiler_latexmk = {aux_dir="aux/", out_dir="out/"}
+-- vim.g.vimtex_compiler_latexmk.aux_dir="aux/"
+-- vim.g.vimtex_compiler_latexmk.out_dir="out/"
+-- vim.g.vimtex_compiler_latexmk = {aux_dir="aux/", out_dir="out/"}
+--[[
 vim.g.vimtex_compiler_latexmk = {
-    aux_dir = 'Aux',
-    out_dir = 'Out',
+    aux_dir = 'Auxiliary',
+    out_dir = 'Output',
     callback = 1,
     continuous = 1,
     executable = 'latexmk',
@@ -49,7 +49,18 @@ vim.g.vimtex_compiler_latexmk = {
         '-interaction=nonstopmode',
     },
 }
-vim.g.tq_mthesaur_file="~/Documents/mthesaur.txt"
+--]]
+
+vim.g.vimtex_compiler_latexmk = {
+    executable = 'latexmk',
+    aux_dir = 'Auxiliary',
+    out_dir = 'Output',
+    options = {
+        '-pdf', '-xelatex', '-synctex=1', '-interaction=nonstopmode',
+        '-shell-escape', '-verbose', '-file-line-error'
+    }
+}
+vim.g.tq_mthesaur_file = "~/Documents/mthesaur.txt"
 --[[
     let g:vimtex_compiler_latexmk = {
         \ 'aux_dir' : '',
@@ -66,4 +77,4 @@ vim.g.tq_mthesaur_file="~/Documents/mthesaur.txt"
         \ ],
         \}
         --]]
-        --
+--
