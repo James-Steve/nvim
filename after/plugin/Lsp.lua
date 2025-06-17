@@ -37,9 +37,8 @@ require("mason").setup({
         }
     }
 })
-lsp.skip_server_setup({'fsautocomplete'})
-require("mason-lspconfig").setup {
-}
+--lsp.skip_server_setup({'fsautocomplete'})
+--require("mason-lspconfig").setup({})
 -- =========================================================
 -- CMP
 -- =========================================================
