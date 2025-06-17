@@ -3,7 +3,7 @@ vim.cmd.packadd("packer.nvim")
 return require("packer").startup(function(use)
     use("wbthomason/packer.nvim")
 
-    --dotenv
+    -- dotenv
     use("SergioRibera/cmp-dotenv")
 
     -- telescope
@@ -29,7 +29,7 @@ return require("packer").startup(function(use)
     -- Snippets
     use({
         "VonHeikemen/lsp-zero.nvim",
-        --branch = "v1.x",
+        -- branch = "v1.x",
         requires = {
             -- LSP Support
             {"neovim/nvim-lspconfig"}, -- Required
@@ -57,7 +57,7 @@ return require("packer").startup(function(use)
         }
     })
     use('ionide/Ionide-vim')
-    --use("WillEhrendreich/Ionide-Nvim")
+    -- use("WillEhrendreich/Ionide-Nvim")
     use("rafamadriz/friendly-snippets")
     use({"L3MON4D3/LuaSnip", dependencies = {"rafamadriz/friendly-snippets"}})
     use("mfussenegger/nvim-jdtls")
@@ -122,7 +122,7 @@ return require("packer").startup(function(use)
 
     use("ThePrimeagen/vim-be-good")
 
-    -- Markdown Previewer
+    -- install without yarn or npm
     use({
         "iamcco/markdown-preview.nvim",
         run = function() vim.fn["mkdp#util#install"]() end
@@ -134,6 +134,7 @@ return require("packer").startup(function(use)
         setup = function() vim.g.mkdp_filetypes = {"markdown"} end,
         ft = {"markdown"}
     })
+
     -- use { 'mhartington/formatter.nvim' }
     -- Formatter
     use({
@@ -150,7 +151,7 @@ return require("packer").startup(function(use)
         requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"}
     })
 
-    --File Browsing, Creation, Editting
+    -- File Browsing, Creation, Editting
     use({
         "stevearc/oil.nvim",
         requires = {"echasnovski/mini.nvim", "nvim-tree/nvim-web-devicons"}
@@ -161,8 +162,7 @@ return require("packer").startup(function(use)
         "tpope/vim-dadbod",
         requires = {
             "kristijanhusak/vim-dadbod-completion",
-            "kristijanhusak/vim-dadbod-ui",
-            "tpope/vim-dotenv"
+            "kristijanhusak/vim-dadbod-ui", "tpope/vim-dotenv"
         }
     })
 
