@@ -7,6 +7,10 @@ dap.listeners.before.event_terminated.dapui_config =
     function() dapui.close() end
 dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
 
+vim.keymap.set("n", "<F4>", function() 
+    require("dap").close()
+    require("dapui").close()
+end)
 vim.keymap.set("n", "<F5>", function() require("dap").continue() end)
 vim.keymap.set("n", "<F6>", function() require("dap").step_back() end)
 vim.keymap.set("n", "<F10>", function() require("dap").step_over() end)
