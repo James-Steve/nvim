@@ -1,27 +1,28 @@
-local lsp = require("lsp-zero")
-
+-- local lsp = require("lsp-zero")
 local ls = require("luasnip")
 local lua_snip =
     require("luasnip.loaders.from_vscode").lazy_load({exclude = {}})
-lsp.preset("recommended")
-lsp.set_preferences({manage_luasnip = false})
+-- lsp.preset("recommended")
+-- lsp.set_preferences({manage_luasnip = false})
 
-require("ionide").setup {
+vim.lsp.config('ionide', {
     -- on_init = on_init,
-    on_attach = function(client, bufnr)
+    --[[ on_attach = function(client, bufnr)
         lsp.on_attach(client, bufnr)
         vim.lsp.codelens.refresh()
     end,
     capabilities = require("cmp_nvim_lsp").default_capabilities()
-}
-lsp.configure('lua_ls', {settings = {Lua = {diagnostics = {globals = {'vim'}}}}})
-lsp.configure('grammarly', {
+    --]]
+})
+vim.lsp.config('lua_ls',
+               {settings = {Lua = {diagnostics = {globals = {'vim'}}}}})
+vim.lsp.config('grammarly', {
     cmd = {"grammarly-languageserver", "--stdio"},
     filetypes = {"markdown", "txt", "text", "tex"}
 
 })
-lsp.configure('ltex', {settings = {language = "en-GB"}})
-lsp.configure('ast_grep', {
+vim.lsp.config('ltex', {settings = {language = "en-GB"}})
+vim.lsp.config('ast_grep', {
     filetypes = {"c", "h", "cs", "js", "py", "ts", "html", "css", "lua", "Java"}
 
 })
@@ -37,8 +38,9 @@ require("mason").setup({
         }
     }
 })
---lsp.skip_server_setup({'fsautocomplete'})
-require("mason-lspconfig").setup({})
+require("mason-lspconfig").setup({
+    automatic_enable = {exclude = {"fsautocomplete"}}
+})
 -- =========================================================
 -- CMP
 -- =========================================================
@@ -56,7 +58,7 @@ local cmp_snippet = {
     end
 }
 
-local cmp_mappings = lsp.defaults.cmp_mappings({
+local cmp_mappings = {
     -- disables enter from triggering cmp
     ['<CR>'] = cmp.config.disable,
     ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
@@ -70,7 +72,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
         behavior = cmp.ConfirmBehavior.Insert,
         select = true
     }, {"i", "c"})
-})
+}
 
 cmp_mappings['<Tab>'] = nil
 cmp_mappings['<S-Tab>'] = nil
@@ -96,20 +98,80 @@ local cmp_sources = {
 cmp.setup.filetype({"sql"}, {
     sources = {{name = 'vim-dadbod-completion'}, {name = 'buffer'}}
 })
-lsp.setup_nvim_cmp({
+cmp.setup({
     mapping = cmp_mappings,
     snippet = cmp_snippet,
-    sources = cmp_sources
+    sources = cmp_sources,
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered()
+    }
 })
 
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline({'/', '?'}, {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {{name = 'buffer'}}
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({{name = 'path'}}, {{name = 'cmdline'}}),
+    matching = {disallow_symbol_nonprefix_matching = false}
+})
+
+--[[
 lsp.set_preferences({
     suggest_lsp_servers = false,
     sign_icons = {error = 'E', warn = 'W', hint = 'H', info = 'I'}
 })
+--]]
 
 -- ===========================================================
 -- Mappings
 -- ==========================================================
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+        local bufnr = args.buf
+        local client = assert(vim.lsp.get_client_by_id(args.data.client_id),
+                              "must have valid client")
+        local builtin = require "telescope.builtin"
+        local opts = {buffer = bufnr, remap = false}
+        vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+        vim.keymap
+            .set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
+        vim.keymap.set("n", "gI", function() vim.lsp.buf.implementation() end,
+                       opts)
+        vim.keymap.set("n", "<C-k>",
+                       function() vim.lsp.buf.signature_help() end, opts)
+        vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
+        vim.keymap.set("n", "gR", function() vim.lsp.buf.rename() end, opts)
+        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+        vim.keymap
+            .set("n", "ga", function() vim.lsp.buf.code_action() end, opts)
+        vim.keymap.set("n", "gA", function()
+            vim.lsp.diagnostic.show_line_diagnostics();
+            vim.lsp.util.show_line_diagnostics()
+        end, opts)
+        vim.keymap.set("n", "<C-n>", function()
+            vim.diagnostic.goto_next()
+        end, opts)
+        vim.keymap.set("n", "<C-p>", function()
+            vim.diagnostic.goto_prev()
+        end, opts)
+        vim.keymap.set("n", "<leader>vll", function() LspLocationList() end,
+                       opts)
+        -- Char 46 is '.'
+        vim.keymap.set("n", "<Char-46>",
+                       function() vim.lsp.buf.code_action() end, opts)
+        vim.keymap.set("n", "<F7>", function() vim.lsp.buf.format() end, opts)
+    end
+
+})
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+vim.lsp.config('*', {capabilities = capabilities})
+--[[
 lsp.on_attach(function(client, bufnr)
     local opts = {buffer = bufnr, remap = false}
 
@@ -135,9 +197,11 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<Char-46>", function() vim.lsp.buf.code_action() end,
                    opts)
     vim.keymap.set("n", "<F7>", function() vim.lsp.buf.format() end, opts)
-end)
+end
+)
+--]]
 
-lsp.setup()
+-- lsp.setup()
 
 vim.diagnostic.config({virtual_text = true})
 
@@ -156,7 +220,6 @@ vim.api.nvim_create_autocmd('BufEnter', {
 
 require('mason-nvim-dap').setup({
     ensure_installed = {'stylua', 'jq'},
-    handlers = {
-    } -- sets up dap in the predefined manner
+    handlers = {} -- sets up dap in the predefined manner
 })
 vim.keymap.set("i", "<C-g>", function() ls.expand() end)
