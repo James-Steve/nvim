@@ -1,19 +1,20 @@
--- local lsp = require("lsp-zero")
 local ls = require("luasnip")
 local lua_snip =
     require("luasnip.loaders.from_vscode").lazy_load({exclude = {}})
--- lsp.preset("recommended")
--- lsp.set_preferences({manage_luasnip = false})
 
+-- vim.lsp.enable('ionide')
+--[[
 vim.lsp.config('ionide', {
     -- on_init = on_init,
-    --[[ on_attach = function(client, bufnr)
-        lsp.on_attach(client, bufnr)
+    --[[
+     on_attach = function(client, bufnr) lsp.on_attach(client, bufnr)
         vim.lsp.codelens.refresh()
     end,
+    -- ] ]
+   filetypes = {"fsx", "fs"},
     capabilities = require("cmp_nvim_lsp").default_capabilities()
-    --]]
 })
+--]]
 vim.lsp.config('lua_ls',
                {settings = {Lua = {diagnostics = {globals = {'vim'}}}}})
 vim.lsp.config('grammarly', {
@@ -39,7 +40,7 @@ require("mason").setup({
     }
 })
 require("mason-lspconfig").setup({
-    automatic_enable = {exclude = {"fsautocomplete"}}
+    -- automatic_enable = {exclude = {"fsautocomplete"}}
 })
 -- =========================================================
 -- CMP
@@ -48,13 +49,9 @@ local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
 
 local cmp_snippet = {
-    -- REQUIRED - you must specify a snippet engine
     expand = function(args)
-        -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
         require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
         lua_snip.lsp_expand(args.body) -- For `luasnip` users.
-        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
     end
 }
 
@@ -108,6 +105,7 @@ cmp.setup({
     }
 })
 
+--[[
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({'/', '?'}, {
     mapping = cmp.mapping.preset.cmdline(),
@@ -120,14 +118,7 @@ cmp.setup.cmdline(':', {
     sources = cmp.config.sources({{name = 'path'}}, {{name = 'cmdline'}}),
     matching = {disallow_symbol_nonprefix_matching = false}
 })
-
---[[
-lsp.set_preferences({
-    suggest_lsp_servers = false,
-    sign_icons = {error = 'E', warn = 'W', hint = 'H', info = 'I'}
-})
---]]
-
+    --]]
 -- ===========================================================
 -- Mappings
 -- ==========================================================
@@ -138,21 +129,24 @@ vim.api.nvim_create_autocmd('LspAttach', {
                               "must have valid client")
         local builtin = require "telescope.builtin"
         local opts = {buffer = bufnr, remap = false}
+        local floating = {border = "single"}
         vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
         vim.keymap
             .set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
         vim.keymap.set("n", "gI", function() vim.lsp.buf.implementation() end,
                        opts)
         vim.keymap.set("n", "<C-k>",
-                       function() vim.lsp.buf.signature_help() end, opts)
+                       function() vim.lsp.buf.signature_help(floating) end, opts)
         vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
         vim.keymap.set("n", "gR", function() vim.lsp.buf.rename() end, opts)
-        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+        vim.keymap.set("n", "K", function() vim.lsp.buf.hover(floating) end,
+                       opts)
         vim.keymap
             .set("n", "ga", function() vim.lsp.buf.code_action() end, opts)
         vim.keymap.set("n", "gA", function()
-            vim.lsp.diagnostic.show_line_diagnostics();
-            vim.lsp.util.show_line_diagnostics()
+            -- vim.lsp.diagnostic.show_line_diagnostics();
+            -- vim.lsp.util.show_line_diagnostics()
+            vim.diagnostic.setqflist()
         end, opts)
         vim.keymap.set("n", "<C-n>", function()
             vim.diagnostic.goto_next()
@@ -170,38 +164,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 })
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-vim.lsp.config('*', {capabilities = capabilities})
---[[
-lsp.on_attach(function(client, bufnr)
-    local opts = {buffer = bufnr, remap = false}
-
-    vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-    vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
-    vim.keymap.set("n", "gI", function() vim.lsp.buf.implementation() end, opts)
-    vim.keymap.set("n", "<C-k>", function() vim.lsp.buf.signature_help() end,
-                   opts)
-    vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
-    vim.keymap.set("n", "gR", function() vim.lsp.buf.rename() end, opts)
-    vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-    vim.keymap.set("n", "ga", function() vim.lsp.buf.code_action() end, opts)
-    vim.keymap.set("n", "gA", function()
-        vim.lsp.diagnostic.show_line_diagnostics();
-        vim.lsp.util.show_line_diagnostics()
-    end, opts)
-    vim.keymap
-        .set("n", "<C-n>", function() vim.diagnostic.goto_next() end, opts)
-    vim.keymap
-        .set("n", "<C-p>", function() vim.diagnostic.goto_prev() end, opts)
-    vim.keymap.set("n", "<leader>vll", function() LspLocationList() end, opts)
-    -- Char 46 is '.'
-    vim.keymap.set("n", "<Char-46>", function() vim.lsp.buf.code_action() end,
-                   opts)
-    vim.keymap.set("n", "<F7>", function() vim.lsp.buf.format() end, opts)
-end
-)
---]]
-
--- lsp.setup()
+vim.lsp.config('*', {capabilities = capabilities, root_marks = {'.git'}})
 
 vim.diagnostic.config({virtual_text = true})
 
@@ -223,3 +186,33 @@ require('mason-nvim-dap').setup({
     handlers = {} -- sets up dap in the predefined manner
 })
 vim.keymap.set("i", "<C-g>", function() ls.expand() end)
+
+vim.diagnostic.config({
+    virtual_text = {
+        source = "always",
+        prefix = function(args)
+            local diagnostic = args.severity
+            local enums = {
+                [vim.diagnostic.severity.ERROR] ='',
+                [vim.diagnostic.severity.WARN] = '',
+                [vim.diagnostic.severity.INFO] = '󰋼',
+                [vim.diagnostic.severity.HINT] = '󰌵'
+            }
+            return enums[diagnostic]
+        end
+    },
+
+    --[[
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] ='E',
+            [vim.diagnostic.severity.WARN] = '',
+            [vim.diagnostic.severity.INFO] = '󰋼',
+            [vim.diagnostic.severity.HINT] = '󰌵'
+        }
+    },
+    --]]
+    update_in_insert = false,
+    underline = true,
+    severity_sort = true
+})
