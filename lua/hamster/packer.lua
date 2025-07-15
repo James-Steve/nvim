@@ -169,6 +169,12 @@ return require("packer").startup(function(use)
     -- dmbl database design file, syntax highlighting
     use({"nanotee/sqls.nvim"})
     use({"jidn/vim-dbml"})
+    -- Surround
+    use({
+        "kylechui/nvim-surround",
+        tag = "*" -- Use for stability; omit to use `main` branch for the latest features
+    })
+
     -- keymapping
     use({
         "tris203/hawtkeys.nvim",
@@ -214,6 +220,14 @@ return require("packer").startup(function(use)
             }
             --- if you use functions, or whichkey, or lazy to map keys
             --- then please see the API below for options
+        }
+    })
+    use({
+        "amitds1997/remote-nvim.nvim",
+        requires = {
+            "nvim-lua/plenary.nvim", -- For standard functions
+            "MunifTanjim/nui.nvim", -- To build the plugin UI
+            "nvim-telescope/telescope.nvim" -- For picking b/w different remote methods
         }
     })
 
