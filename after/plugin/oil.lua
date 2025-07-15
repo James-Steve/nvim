@@ -4,7 +4,8 @@ CustomOilBar = function()
 
     return "  " .. vim.fn.fnamemodify(path, ":.")
 end
-require("oil").setup({
+local oil = require("oil")
+oil.setup({
 
     columns = {"icon"},
     keymaps = {
@@ -25,5 +26,25 @@ require("oil").setup({
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", {desc = "Open parent directory"})
 
 -- Open parent directory in floating window
-vim.keymap.set("n", "<space>-", require("oil").toggle_float)
+vim.keymap.set("n", "<space>-", oil.toggle_float)
 
+-- When neovim opened with arguments folder/anotherfolder/project/?
+-- project directory will be made the working directory
+-- and then open oil
+local group_cdpwd = vim.api.nvim_create_augroup("group_cdpwd", {clear = true})
+vim.api.nvim_create_autocmd("VimEnter", {
+    group = group_cdpwd,
+    callback = function()
+        local bufname = vim.api.nvim_get_current_buf()
+        local filename = vim.api.nvim_buf_get_name(bufname)
+        if (vim.fn.fnamemodify(filename, ":t") == "?") then
+            local path = vim.fn.fnamemodify(filename, ":p:h")
+            vim.api.nvim_set_current_dir(path)
+            vim.schedule(function()
+                vim.api.nvim_buf_delete(bufname, {force = true})
+            end)
+            vim.defer_fn(function() oil.open() end, 10)
+
+        end
+    end
+})
