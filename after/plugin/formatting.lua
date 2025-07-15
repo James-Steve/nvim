@@ -30,6 +30,7 @@ conform.setup({
         graphql = {"prettier"},
         lua = {"lua-format"},
         python = {"isort", "black"},
+        xml = {"xmlformatter"},
         -- python = {"pyink"}
         -- sql = {"sql_formatter"}
         sql = {"pg_format"}
