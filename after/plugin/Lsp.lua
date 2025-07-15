@@ -27,6 +27,20 @@ vim.lsp.config('ast_grep', {
     filetypes = {"c", "h", "cs", "js", "py", "ts", "html", "css", "lua", "Java"}
 
 })
+vim.lsp.config('pyright', {
+    Settings = {
+        python = {
+            analysis = {
+                autoSearchPaths = true,
+                diagnosticMode = "openFilesOnly",
+                useLibraryCodeForTypes = true,
+                extraPaths = {
+                    "/usr/lib64/python3.13/site-packages",
+                }
+            }
+        }
+    }
+})
 -- =========================================================
 -- Mason (Lsp installer, Dap installer, linter installer and formatter installer)
 -- =========================================================
@@ -51,7 +65,7 @@ local cmp_select = {behavior = cmp.SelectBehavior.Select}
 local cmp_snippet = {
     expand = function(args)
         require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        lua_snip.lsp_expand(args.body) -- For `luasnip` users.
+        -- lua_snip.lsp_expand(args.body) -- For `luasnip` users.
     end
 }
 
@@ -193,7 +207,7 @@ vim.diagnostic.config({
         prefix = function(args)
             local diagnostic = args.severity
             local enums = {
-                [vim.diagnostic.severity.ERROR] ='',
+                [vim.diagnostic.severity.ERROR] = '',
                 [vim.diagnostic.severity.WARN] = '',
                 [vim.diagnostic.severity.INFO] = '󰋼',
                 [vim.diagnostic.severity.HINT] = '󰌵'
