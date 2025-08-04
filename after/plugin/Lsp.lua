@@ -19,7 +19,7 @@ vim.lsp.config('lua_ls',
                {settings = {Lua = {diagnostics = {globals = {'vim'}}}}})
 vim.lsp.config('grammarly', {
     cmd = {"grammarly-languageserver", "--stdio"},
-    filetypes = {"markdown", "txt", "text", "tex"}
+    filetypes = {"markdown", "txt", "text", "tex", "md"}
 
 })
 vim.lsp.config('ltex', {settings = {language = "en-GB"}})
