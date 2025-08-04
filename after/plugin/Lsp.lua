@@ -22,7 +22,14 @@ vim.lsp.config('grammarly', {
     filetypes = {"markdown", "txt", "text", "tex", "md"}
 
 })
-vim.lsp.config('ltex', {settings = {language = "en-GB"}})
+vim.lsp.config('ltex', {
+    settings = {
+        language = "en-GB",
+        enabled = {
+            "bibtex", "context", "context.tex", "html", "latex", "markdown", "org", "restructuredtext", "rsweave"
+        }
+    }
+})
 vim.lsp.config('ast_grep', {
     filetypes = {"c", "h", "cs", "js", "py", "ts", "html", "css", "lua", "Java"}
 
@@ -34,9 +41,7 @@ vim.lsp.config('pyright', {
                 autoSearchPaths = true,
                 diagnosticMode = "openFilesOnly",
                 useLibraryCodeForTypes = true,
-                extraPaths = {
-                    "/usr/lib64/python3.13/site-packages",
-                }
+                extraPaths = {"/usr/lib64/python3.13/site-packages"}
             }
         }
     }
