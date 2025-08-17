@@ -6,7 +6,6 @@ blue
 darker
 jsonld-lsp
 json-lsp
-csharp-language-server
 isort
 clangd
 netcoredbg
@@ -37,3 +36,4 @@ pyright
 lemminx
 typos-lsp
 marksman
+roslyn
