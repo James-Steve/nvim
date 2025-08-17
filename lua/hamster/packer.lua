@@ -56,6 +56,10 @@ return require("packer").startup(function(use)
 --]]
         }
     })
+
+    --omnisharp replacement
+    use("seblyng/roslyn.nvim")
+
     use('ionide/Ionide-vim')
     -- use("WillEhrendreich/Ionide-Nvim")
     use("rafamadriz/friendly-snippets")

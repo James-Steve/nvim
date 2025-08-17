@@ -1,20 +1,8 @@
 local ls = require("luasnip")
+require("roslyn").setup()
 local lua_snip =
     require("luasnip.loaders.from_vscode").lazy_load({exclude = {}})
 
--- vim.lsp.enable('ionide')
---[[
-vim.lsp.config('ionide', {
-    -- on_init = on_init,
-    --[[
-     on_attach = function(client, bufnr) lsp.on_attach(client, bufnr)
-        vim.lsp.codelens.refresh()
-    end,
-    -- ] ]
-   filetypes = {"fsx", "fs"},
-    capabilities = require("cmp_nvim_lsp").default_capabilities()
-})
---]]
 vim.lsp.config('lua_ls',
                {settings = {Lua = {diagnostics = {globals = {'vim'}}}}})
 vim.lsp.config('grammarly', {
@@ -46,6 +34,20 @@ vim.lsp.config('pyright', {
         }
     }
 })
+vim.lsp.config("roslyn", {
+    on_attach = function()
+        print("This will run when the server attaches!")
+    end,
+    settings = {
+        ["csharp|inlay_hints"] = {
+            csharp_enable_inlay_hints_for_implicit_object_creation = true,
+            csharp_enable_inlay_hints_for_implicit_variable_types = true,
+        },
+        ["csharp|code_lens"] = {
+            dotnet_enable_references_code_lens = true,
+        },
+    },
+})
 -- =========================================================
 -- Mason (Lsp installer, Dap installer, linter installer and formatter installer)
 -- =========================================================
@@ -56,6 +58,10 @@ require("mason").setup({
             package_pending = "➜",
             package_uninstalled = "✗"
         }
+    },
+    registries = {
+        "github:mason-org/mason-registry",
+        "github:Crashdummyy/mason-registry",
     }
 })
 require("mason-lspconfig").setup({
@@ -121,7 +127,13 @@ cmp.setup({
     window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered()
-    }
+    },
+    formatting = {
+    format = function(entry, vim_item)
+      vim_item.menu = entry.source.name
+      return vim_item
+    end,
+  }
 })
 
 --[[
