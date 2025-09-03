@@ -53,7 +53,7 @@ require("mason-lspconfig").setup({
     -- automatic_enable = {exclude = {"fsautocomplete"}}
 })
 require("lsp.Roslyn")
---require("lsp.roslywork")
+-- require("lsp.roslywork")
 -- =========================================================
 -- CMP
 -- =========================================================

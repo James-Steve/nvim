@@ -57,8 +57,8 @@ return require("packer").startup(function(use)
         }
     })
 
-    --omnisharp replacement
-    use("seblyng/roslyn.nvim")
+    -- omnisharp replacement
+    use({"seblyng/roslyn.nvim", requires = {"tris203/rzls.nvim"}})
 
     use('ionide/Ionide-vim')
     -- use("WillEhrendreich/Ionide-Nvim")

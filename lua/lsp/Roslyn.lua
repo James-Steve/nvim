@@ -11,7 +11,6 @@ local cmd = {
                                    "Microsoft.VisualStudioCode.RazorExtension.dll")
 }
 local handlers = require("rzls.roslyn_handlers")
-print(vim.inspect(handlers))
 local opts = {
     -- "auto" | "roslyn" | "off"
     --
@@ -66,7 +65,7 @@ ros.setup({
 vim.lsp.config("roslyn", {
     opts = opts,
     cmd = cmd,
-    on_attach = function() print("This will run when the server attaches!") end,
+    -- on_attach = function() print("This will run when the server attaches!") end,
     root_markers = {{".sln", ".csproj", "project.json"}, ".git"},
     handlers = handlers,
     settings = {
