@@ -69,7 +69,9 @@ return require("packer").startup(function(use)
     -- NEED to integrate these
     -- ==================================================================
 
-    use("luisiacc/gruvbox-baby", {"branch : main"})
+    -- use("luisiacc/gruvbox-baby", {"branch : main"})
+    use {"ellisonleao/gruvbox.nvim"}
+    use {"olimorris/onedarkpro.nvim"}
 
     -- autobrackets, curlybraces, quatation marks,etc
     use({
@@ -108,7 +110,7 @@ return require("packer").startup(function(use)
     use("isakbm/gitgraph.nvim")
 
     -- todo lists:
-    use("vimwiki/vimwiki")
+    -- use("vimwiki/vimwiki")
 
     -- latex
     use("lervag/vimtex")
@@ -234,5 +236,19 @@ return require("packer").startup(function(use)
             "nvim-telescope/telescope.nvim" -- For picking b/w different remote methods
         }
     })
+
+    use({
+        'MeanderingProgrammer/render-markdown.nvim',
+        after = {'nvim-treesitter'},
+        requires = {'nvim-mini/mini.nvim', opt = true} -- if you use the mini.nvim suite
+        -- requires = { 'nvim-mini/mini.icons', opt = true }, -- if you use standalone mini plugins
+        -- requires = { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
+    })
+
+    use {
+        'https://gitlab.com/itaranto/preview.nvim',
+        tag = '*',
+    }
+    use ("aklt/plantuml-syntax")
 
 end)

@@ -1,0 +1,6 @@
+dnf install graphviz
+go install github.com/mhersson/mpls@latest
+npm install -g @mermaid-js/mermaid-cli
+
+
+sudo dnf install qimgv

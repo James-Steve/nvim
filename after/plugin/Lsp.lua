@@ -14,8 +14,16 @@ vim.lsp.config('ltex', {
         language = "en-GB",
         enabled = {
             "bibtex", "context", "context.tex", "html", "latex", "markdown",
-            "org", "restructuredtext", "rsweave"
+            "org", "restructuredtext", "rsweave", "vimwiki"
+        },
+        ltex = {
+            enabled = {
+                "bibtex", "gitcommit", "markdown", "org", "tex",
+                "restructuredtext", "rsweave", "latex", "quarto", "rmd",
+                "context", "html", "xhtml", "mail", "plaintext", "vimwiki"
+            }
         }
+
     }
 })
 vim.lsp.config('ast_grep', {
@@ -34,6 +42,30 @@ vim.lsp.config('pyright', {
         }
     }
 })
+vim.lsp.config('marksman', {filetypes = {"markdown", "vimwiki"}})
+
+vim.lsp.enable("typos_lsp")
+vim.lsp.enable({"mpls"})
+vim.lsp.config('mpls', {
+    cmd = {"mpls", "--dark-mode", "--enable-emoji", "--enable-footnotes", "--plantuml-server localhost:6969"},
+    root_markers = {".marksman.toml", ".git"},
+    filetypes = {"markdown", "makdown.mdx"},
+    on_attach = function(client, bufnr)
+        vim.api.nvim_buf_create_user_command(bufnr, "MplsOpenPreview",
+                                             function()
+            local params = {command = "open-preview"}
+            client.request("workspace/executeCommand", params, function(err, _)
+                if err then
+                    vim.notify("Error executing command: " .. err.message,
+                               vim.log.levels.ERROR)
+                else
+                    vim.notify("Preview opened", vim.log.levels.INFO)
+                end
+            end)
+        end, {desc = "Preview markdown with mpls"})
+    end
+})
+
 -- =========================================================
 -- Mason (Lsp installer, Dap installer, linter installer and formatter installer)
 -- =========================================================

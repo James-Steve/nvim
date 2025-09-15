@@ -24,11 +24,11 @@ tel.setup {
             ".git/objects", ".git/heads", ".git/hooks", ".git/index",
             ".git/*HEAD*", ".git/logs", ".git/*refs*", ".git/info",
             ".git/packed*", ".git/COMMITS*", ".git/description", ".git/ORIG*",
-            ".git/FETCH*"
+            ".git/FETCH*", ".git/modules*"
         }
     }
 }
-local opts = {file_ignore_patterns = {".git/", ".git/*"}}
+local opts = {".git/"}
 
 local builtin = require('telescope.builtin')
 tel.load_extension("file_browser")
@@ -36,13 +36,11 @@ tel.load_extension("file_browser")
 vim.keymap.set('n', '<Leader>ff', function()
     builtin.find_files({
         hidden = true,
-        file_ignore_pattern = {".git/*", ".git/"}
     })
 end, {})
 vim.keymap.set('v', '<Leader>ff', function()
     builtin.find_files({
         hidden = true,
-        file_ignore_pattern = {".git/*", ".git/"}
     })
 end, {})
 -- Telescoping in ~/.config/nvim

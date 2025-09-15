@@ -46,7 +46,6 @@ Welcome to my Custom Neovim Configuration
 - cargo
 
 
-
 ## Directory Structure and Function
 ├── after &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;&emsp; All files in this directory are excuted after plugins are loaded \
 │   └── plugin  &emsp; &emsp; &emsp; &emsp; &emsp; Plugin Directory \
