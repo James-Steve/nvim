@@ -56,7 +56,7 @@ vim.lsp.config("codebook", {
 })
 vim.lsp.enable("typos_lsp")
 -- colour
--- vim.lsp.disable("codebook")
+vim.lsp.enable({name = "codebook", enable = false})
 vim.lsp.enable({"mpls"})
 vim.lsp.config('mpls', {
     cmd = {
@@ -96,9 +96,7 @@ require("mason").setup({
         "github:mason-org/mason-registry", "github:Crashdummyy/mason-registry"
     }
 })
-require("mason-lspconfig").setup({
-    -- automatic_enable = {exclude = {"fsautocomplete"}}
-})
+require("mason-lspconfig").setup({automatic_enable = {exclude = {"codebook"}}})
 require("lsp.Roslyn")
 -- require("lsp.roslywork")
 -- =========================================================
@@ -187,13 +185,31 @@ cmp.setup.cmdline(':', {
 -- ===========================================================
 -- Mappings
 -- ==========================================================
-local toggle_lsp_server_diagnostics = function(name)
-    local client = vim.inspect(vim.lsp.get_clients({name = name})[1])
-    local id = client.id
-    vim.diagnostic.enable(not vim.diagnostic.is_enabled({ns_id = id}),
-                          {ns_id = id})
-    -- print(vim.inspect(id))
-    -- print(vim.inspect(client))
+local function toggle_lsp_server(name)
+    local buf_clients = vim.lsp.get_clients({bufnr = 0})
+    local found = false
+    local message = ""
+    for _, client in pairs(buf_clients) do
+        if client.name == name and not client.is_stopped() then
+            local namspace = vim.lsp.diagnostic.get_namespace(client.id, true)
+            vim.lsp.enable({name = name, enable = false})
+            --vim.diagnostic.hide(namspace)
+            vim.diagnostic.enable(false, {ns_id = namspace})
+           vim.diagnostic.reset()
+           vim.lsp.stop_client(client.id)
+            found = true
+            -- print("Stopping " .. vim.inspect(client.name))
+            message =
+                message .. " Stopping " .. vim.inspect(client.name) .. ":" ..
+                    client.id .. ":" .. namspace
+        end
+    end
+    print(message)
+    if not found then
+        vim.lsp.enable(name)
+        print("Starting " .. name)
+        vim.cmd("LspStart " .. name)
+    end
 end
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
@@ -235,7 +251,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set("n", "<F7>", function() vim.lsp.buf.format() end, opts)
 
         vim.keymap.set("n", "<leader>mt",
-                       function() toggle_lsp_server_diagnostics("codebook") end, opts)
+        -- function() toggle_lsp_server_diagnostics("codebook") end, opts)
+                       function() toggle_lsp_server("codebook") end, opts)
 
     end
 
@@ -293,3 +310,4 @@ vim.diagnostic.config({
     underline = true,
     severity_sort = true
 })
+vim.lsp.enable({name = "codebook", enable = false})
