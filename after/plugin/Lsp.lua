@@ -43,11 +43,26 @@ vim.lsp.config('pyright', {
     }
 })
 vim.lsp.config('marksman', {filetypes = {"markdown", "vimwiki"}})
-
+-- vim.lsp.config("typos_lsp", {command = "typos-lsp" })
+vim.lsp.config("typos_lsp", {cmd = {"typos-lsp", "--locale=en-gb"}})
+vim.lsp.config("codebook", {
+    cmd = {'codebook-lsp', 'serve'},
+    filetypes = {
+        'c', 'css', 'gitcommit', 'go', 'haskell', 'html', 'java', 'javascript',
+        'javascriptreact', 'lua', 'markdown', 'php', 'python', 'ruby', 'rust',
+        'toml', 'text', 'typescript', 'typescriptreact'
+    },
+    root_markers = {'.git', 'codebook.toml', '.codebook.toml'}
+})
 vim.lsp.enable("typos_lsp")
+-- colour
+-- vim.lsp.disable("codebook")
 vim.lsp.enable({"mpls"})
 vim.lsp.config('mpls', {
-    cmd = {"mpls", "--dark-mode", "--enable-emoji", "--enable-footnotes", "--plantuml-server localhost:6969"},
+    cmd = {
+        "mpls", "--dark-mode", "--enable-emoji", "--enable-footnotes",
+        "--plantuml-server localhost:6969"
+    },
     root_markers = {".marksman.toml", ".git"},
     filetypes = {"markdown", "makdown.mdx"},
     on_attach = function(client, bufnr)
@@ -172,6 +187,14 @@ cmp.setup.cmdline(':', {
 -- ===========================================================
 -- Mappings
 -- ==========================================================
+local toggle_lsp_server_diagnostics = function(name)
+    local client = vim.inspect(vim.lsp.get_clients({name = name})[1])
+    local id = client.id
+    vim.diagnostic.enable(not vim.diagnostic.is_enabled({ns_id = id}),
+                          {ns_id = id})
+    -- print(vim.inspect(id))
+    -- print(vim.inspect(client))
+end
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
         local bufnr = args.buf
@@ -210,6 +233,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set("n", "<Char-46>",
                        function() vim.lsp.buf.code_action() end, opts)
         vim.keymap.set("n", "<F7>", function() vim.lsp.buf.format() end, opts)
+
+        vim.keymap.set("n", "<leader>mt",
+                       function() toggle_lsp_server_diagnostics("codebook") end, opts)
+
     end
 
 })
