@@ -13,9 +13,10 @@
     },
     --]]
     plantuml = {
-      name = 'plantuml_svg',
+      name = 'plantuml_png',
       --renderer = { type = 'command', opts = { cmd = { 'eog' } } },
-      renderer = { type = 'command', opts = { cmd = { 'qimgv' } } },
+      --renderer = { type = 'command', opts = { cmd = { 'qimgv' } } },
+      renderer = { type = 'command', opts = { cmd = { 'feh' } } },
     },
 
     --[[
@@ -26,9 +27,8 @@
     --]]
   },
   previewers = {
-    plantuml_svg = {
-      --args = { '-pipe', '-tpng' },
-      args = { '-pipe', '-tsvg' },
+    plantuml_png = {
+      args = { '-pipe', '-tpng' },
     },
   },
   render_on_write = true,
