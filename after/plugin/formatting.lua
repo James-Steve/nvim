@@ -3,6 +3,9 @@ local conform = require("conform")
 conform.setup({
     -- formatters = {["sqlfmt"] = {env = { SQLFMT_DIALECT = "clickhouse",}}},
     formatters = {
+        ["tex-fmt"] = {
+            append_args = {"-l", 140}
+        },
         ["sql_formatter"] = {args = {"-l", "postgresql", "$FILENAME"}},
         ["pg_format"] = {
             command = "pg_format",
@@ -33,12 +36,16 @@ conform.setup({
         xml = {"xmlformatter"},
         -- python = {"pyink"}
         -- sql = {"sql_formatter"}
-        sql = {"pg_format"}
+        sql = {"pg_format"},
         -- sql = {"sqlfmt"}
+        latex = {"tex-fmt"},
+        tex = {"tex-fmt"}
+
     }
     -- format_on_save = {lsp_fallback = false, async = false, timeout_ms = 1000}
 })
 
+--conform.formatters.texfmt = {append_args = {"-l", 100}}
 vim.keymap.set({"n", "v"}, "<leader>mp", function()
     conform.format({lsp_fallback = true, async = false, timeout_ms = 1000})
 end, {desc = "Format file or range (in visual mode)"})

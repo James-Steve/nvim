@@ -17,6 +17,7 @@ vim.lsp.config('ltex', {
             "org", "restructuredtext", "rsweave", "vimwiki"
         },
         ltex = {
+            language = "en-GB",
             enabled = {
                 "bibtex", "gitcommit", "markdown", "org", "tex",
                 "restructuredtext", "rsweave", "latex", "quarto", "rmd",
@@ -193,10 +194,10 @@ local function toggle_lsp_server(name)
         if client.name == name and not client.is_stopped() then
             local namspace = vim.lsp.diagnostic.get_namespace(client.id, true)
             vim.lsp.enable({name = name, enable = false})
-            --vim.diagnostic.hide(namspace)
+            -- vim.diagnostic.hide(namspace)
             vim.diagnostic.enable(false, {ns_id = namspace})
-           vim.diagnostic.reset()
-           vim.lsp.stop_client(client.id)
+            vim.diagnostic.reset()
+            vim.lsp.stop_client(client.id)
             found = true
             -- print("Stopping " .. vim.inspect(client.name))
             message =
