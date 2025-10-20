@@ -38,5 +38,5 @@ local con = {
 }
 wk.setup(con)
 
-vim.keymap.set("n", "<Leader>t", function() wk.show_all() end)
+--vim.keymap.set("n", "<Leader>t", function() wk.show_all() end)
 

@@ -251,4 +251,7 @@ return require("packer").startup(function(use)
     }
     use ("aklt/plantuml-syntax")
 
+    --Code tree
+    use ("stevearc/aerial.nvim")
+
 end)
