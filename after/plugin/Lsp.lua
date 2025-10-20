@@ -44,8 +44,6 @@ vim.lsp.config('pyright', {
     }
 })
 vim.lsp.config('marksman', {filetypes = {"markdown", "vimwiki"}})
--- vim.lsp.config("typos_lsp", {command = "typos-lsp" })
-vim.lsp.config("typos_lsp", {cmd = {"typos-lsp", "--locale=en-gb"}})
 vim.lsp.config("codebook", {
     cmd = {'codebook-lsp', 'serve'},
     filetypes = {
@@ -55,9 +53,10 @@ vim.lsp.config("codebook", {
     },
     root_markers = {'.git', 'codebook.toml', '.codebook.toml'}
 })
+vim.lsp.config('typos_lsp',
+               {cmd = {"typos-lsp", "--exclude=*.tex", "--exclude=*.txt", "--locale=en-gb"}})
 vim.lsp.enable("typos_lsp")
 -- colour
-vim.lsp.enable({name = "codebook", enable = false})
 vim.lsp.enable({"mpls"})
 vim.lsp.config('mpls', {
     cmd = {
