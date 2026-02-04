@@ -31,7 +31,8 @@ conform.setup({
         yaml = {"prettier"},
         markdown = {"prettier"},
         graphql = {"prettier"},
-        lua = {"lua-format"},
+        --lua = {"lua-format"},
+        lua = {"stylua"},
         python = {"isort", "black"},
         xml = {"xmlformatter"},
         -- python = {"pyink"}
