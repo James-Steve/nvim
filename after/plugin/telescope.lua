@@ -1,5 +1,6 @@
 local tel = require('telescope')
 local path_actions = require('telescope_insert_path')
+local actions = require("telescope.actions")
 
 tel.setup {
     defaults = {
@@ -11,9 +12,15 @@ tel.setup {
                 -- ["]"] = path_actions.insert_abspath_visual,
                 -- ["{"] = path_actions.insert_reltobufpath_insert,
                 -- ["}"] = path_actions.insert_abspath_insert,
-                ["pr"] = path_actions.insert_reltobufpath_normal,
-                ["["] = path_actions.insert_reltobufpath_a_normal,
-                ["pa"] = path_actions.insert_abspath_normal
+                --
+                --["pr"] = path_actions.insert_reltobufpath_normal,
+                --["["] = path_actions.insert_reltobufpath_a_normal,
+                --["pa"] = path_actions.insert_abspath_normal,
+                ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+                ["<C-u>"] = actions.preview_scrolling_up,
+                ["<C-d>"] = actions.preview_scrolling_down,
+                ["<C-f>"] = actions.preview_scrolling_left,
+                ["<C-k>"] = actions.preview_scrolling_right
                 -- If you want to get relative path that is relative to the cwd, use
                 -- `relpath` instead of `reltobufpath`
                 -- You can skip the location postfix if you specify that in the function name.
@@ -33,16 +40,10 @@ local opts = {".git/"}
 local builtin = require('telescope.builtin')
 tel.load_extension("file_browser")
 
-vim.keymap.set('n', '<Leader>ff', function()
-    builtin.find_files({
-        hidden = true,
-    })
-end, {})
-vim.keymap.set('v', '<Leader>ff', function()
-    builtin.find_files({
-        hidden = true,
-    })
-end, {})
+vim.keymap.set('n', '<Leader>ff',
+               function() builtin.find_files({hidden = true}) end, {})
+vim.keymap.set('v', '<Leader>ff',
+               function() builtin.find_files({hidden = true}) end, {})
 -- Telescoping in ~/.config/nvim
 vim.keymap.set('n', '<Leader>rc', function()
     builtin.find_files({
