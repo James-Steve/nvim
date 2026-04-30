@@ -1,3 +1,4 @@
+--[[
 local wk = require("hawtkeys")
 local con = {
     leader = " ", -- the key you want to use as the leader, default is space
@@ -39,4 +40,4 @@ local con = {
 wk.setup(con)
 
 --vim.keymap.set("n", "<Leader>t", function() wk.show_all() end)
-
+--]]

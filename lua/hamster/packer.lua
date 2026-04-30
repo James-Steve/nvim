@@ -18,7 +18,7 @@ return require("packer").startup(function(use)
 	})
 
 	-- treesitter
-	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", branch = 'main'})
 	use("nvim-treesitter/playground")
 	use("nvim-treesitter/nvim-treesitter-context")
 
@@ -191,6 +191,7 @@ return require("packer").startup(function(use)
 	})
 
 	-- keymapping
+    --[[
 	use({
 		"tris203/hawtkeys.nvim",
 		dependencies = {
@@ -238,6 +239,7 @@ return require("packer").startup(function(use)
 			--- then please see the API below for options
 		},
 	})
+    --]]
 	use({
 		"amitds1997/remote-nvim.nvim",
 		requires = {
