@@ -44,7 +44,7 @@ vim.lsp.config("ltex", {
 	},
 })
 vim.lsp.config("ast_grep", {
-	filetypes = { "c", "h", "cs", "js", "py", "ts", "html", "css", "lua", "Java" },
+	filetypes = { "c", "h", "cs", "js", "py", "ts", "html", "css", "lua", "Java", "dart", "javascript", "typescript", "tsx" },
 })
 vim.lsp.config("pyright", {
 	Settings = {
@@ -88,6 +88,7 @@ vim.lsp.config("typos_lsp", { cmd = { "typos-lsp", "--exclude=*.tex", "--exclude
 vim.lsp.enable("typos_lsp")
 -- colour
 vim.lsp.enable({ "mpls" })
+vim.lsp.enable({"dartls"})
 vim.lsp.config("mpls", {
 	cmd = {
 		"mpls",
@@ -274,6 +275,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			vim.lsp.buf.rename()
 		end, opts)
 		vim.keymap.set("n", "K", function()
+			--vim.lsp.buf.hover(floating)
 			vim.lsp.buf.hover(floating)
 		end, opts)
 		vim.keymap.set("n", "ga", function()
