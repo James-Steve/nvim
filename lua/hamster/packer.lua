@@ -19,7 +19,6 @@ return require("packer").startup(function(use)
 
 	-- treesitter
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", branch = 'main'})
-	use("nvim-treesitter/playground")
 	use("nvim-treesitter/nvim-treesitter-context")
 
 	-- undotree
@@ -84,18 +83,7 @@ return require("packer").startup(function(use)
 	})
 
 	-- indentation marker
-	use({
-		"lukas-reineke/indent-blankline.nvim",
-		tag = "v2.20.8",
-		config = function()
-			require("indent_blankline").setup({
-				-- for example, context is off by default, use this to turn it on
-				show_current_context = true,
-				show_current_context_start = true,
-			})
-		end,
-	})
-
+	use({"lukas-reineke/indent-blankline.nvim"})
 	-- status line
 	use({
 		"hoob3rt/lualine.nvim",

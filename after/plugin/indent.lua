@@ -3,3 +3,4 @@
     show_current_context_start = true
 }
 --]]
+require("ibl").setup()

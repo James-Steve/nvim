@@ -1,4 +1,17 @@
+require('nvim-treesitter').setup {
+  -- Directory to install parsers and queries to (prepended to `runtimepath` to have priority)
+  install_dir = vim.fn.stdpath('data') .. '/site'
+}
+require('nvim-treesitter').install({
+        "bash", "javascript", "typescript", "c", "lua", "rust", "java", "vim",
+        "latex", "c_sharp", "git_config", "git_rebase", --"gitcommit",
+        "gitignore", "gitattributes", "diff", "css", "cmake", "bibtex", "csv",
+        "go", "sql", "json", "markdown", "markdown_inline"
+    }):wait(300000)
+
+--[[
 require'nvim-treesitter.configs'.setup {
+
     -- A list of parser names, or "all"
     ensure_installed = {
         "bash", "javascript", "typescript", "c", "lua", "rust", "java", "vim",
@@ -27,4 +40,4 @@ require'nvim-treesitter.configs'.setup {
         additional_vim_regex_highlighting = false
     }
 }
-
+--]]
