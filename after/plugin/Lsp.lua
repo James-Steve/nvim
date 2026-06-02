@@ -39,6 +39,8 @@ vim.lsp.config("ltex", {
 				"mail",
 				"plaintext",
 				"vimwiki",
+                "network",
+                "container",
 			},
 		},
 	},
