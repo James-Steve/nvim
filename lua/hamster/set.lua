@@ -65,3 +65,6 @@ vim.g.markdown_fenced_languages = {
   "lua",
   "plantuml",
 }
+
+--vim.opt.conceallevel = 2
+--vim.opt.concealcursor = "nc"

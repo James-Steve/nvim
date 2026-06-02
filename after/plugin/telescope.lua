@@ -34,6 +34,9 @@ tel.setup({
 			".git/ORIG*",
 			".git/FETCH*",
 			".git/modules*",
+            
+
+            "node_modules/*",
 		},
 	},
 })

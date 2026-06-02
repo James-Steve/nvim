@@ -6,7 +6,7 @@ require('nvim-treesitter').install({
         "bash", "javascript", "typescript", "c", "lua", "rust", "java", "vim",
         "latex", "c_sharp", "git_config", "git_rebase", --"gitcommit",
         "gitignore", "gitattributes", "diff", "css", "cmake", "bibtex", "csv",
-        "go", "sql", "json", "markdown", "markdown_inline"
+        "go", "sql", "json", "markdown", --"markdown_inline"
     }):wait(300000)
 
 --[[
