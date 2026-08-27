@@ -40,7 +40,8 @@ conform.setup({
         sql = {"pg_format"},
         -- sql = {"sqlfmt"}
         latex = {"tex-fmt"},
-        tex = {"tex-fmt"}
+        tex = {"tex-fmt"},
+        eruby = {"erb_format"}
 
     }
     -- format_on_save = {lsp_fallback = false, async = false, timeout_ms = 1000}
