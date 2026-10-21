@@ -1,39 +1,35 @@
-luaformatter
-ltex-ls
-autoflake
-blackd-client
-blue
-darker
-jsonld-lsp
-json-lsp
-isort
+ast-grep ast_grep
+bash-language-server bashls
+clang-format
 clangd
-netcoredbg
-pyink
-prettier sqlfmt
-autopep8
-black
-typescript-language-server
+darker
 debugpy
 docformatter
-lua-language-server
+erb-formatter
+grammarly-languageserver grammarly
+herb-language-server herb_ls
+isort
+java-debug-adapter
 jdtls
-yaml-language-server
-bash-language-server
-clang-format
-contextive
-ast-grep
-rust-analyzer
-sql-formatter
-texlab
-termux-language-server
-fsautocomplete
-dockerfile-language-server
-docker-compose-language-service
-hadolint
-xmlformatter
+json-lsp jsonls
+lombok-nightly
+ltex-ls ltex
+lua-language-server lua_ls
+luaformatter
+netcoredbg
+openjdk-17
+pbls
+prettier
+protols
+pyink
 pyright
-lemminx
-typos-lsp
-marksman
 roslyn
+ruby-lsp ruby_lsp
+rust-analyzer rust_analyzer
+spring-boot-tools
+sql-formatter
+sqlfmt
+stylua
+texlab
+tsgo
+typos-lsp typos_lsp
