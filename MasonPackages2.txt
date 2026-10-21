@@ -1,0 +1,47 @@
+ast-grep ast_grep
+autoflake
+autopep8
+bash-language-server bashls
+black
+blackd-client
+blue
+clang-format
+clangd
+codebook
+contextive
+css-lsp cssls
+darker
+debugpy
+docformatter
+docker-compose-language-service docker_compose_language_service
+dockerfile-language-server dockerls
+fsautocomplete
+hadolint
+haskell-language-server hls
+html-lsp html
+hyprls
+isort
+jdtls
+json-lsp jsonls
+jsonld-lsp
+lemminx
+ltex-ls ltex
+lua-language-server lua_ls
+luaformatter
+marksman
+netcoredbg
+prettier
+pyink
+pyright
+roslyn
+rust-analyzer rust_analyzer
+rzls
+sql-formatter
+sqlfmt
+termux-language-server termux_language_server
+tex-fmt
+texlab
+typescript-language-server ts_ls
+typos-lsp typos_lsp
+xmlformatter
+yaml-language-server yamlls
